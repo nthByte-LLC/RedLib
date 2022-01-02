@@ -146,6 +146,19 @@ public class InventoryGUI implements Listener {
 			}
 		}
 	}
+
+	/**
+	 * Fills all the empty slots of the inventory with the given item.
+	 * @param item The item to set in these slots.
+	 */
+	public void fill(ItemStack item){
+		ItemStack[] contents = inventory.getContents();
+		for(int i = 0; i < contents.length; i++){
+			if(contents[i] == null){
+				inventory.setItem(i, item.clone());
+			}
+		}
+	}
 	
 	/**
 	 * Remove a button from the inventory
