@@ -22,6 +22,7 @@ import redempt.redlib.RedLib;
 import redempt.redlib.json.JSONList;
 import redempt.redlib.json.JSONMap;
 import redempt.redlib.json.JSONParser;
+import redempt.redlib.misc.ColorUtils;
 import redempt.redlib.nms.NMSHelper;
 
 import java.lang.reflect.Method;
@@ -71,7 +72,7 @@ public class ItemUtils {
 	 */
 	public static ItemStack rename(ItemStack item, String name) {
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(name);
+		meta.setDisplayName(ColorUtils.tr(name));
 		item.setItemMeta(meta);
 		return item;
 	}
@@ -95,7 +96,7 @@ public class ItemUtils {
 	public static ItemStack setLore(ItemStack item, String line) {
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = new ArrayList<>();
-		lore.add(line);
+		lore.add(ColorUtils.tr(line));
 		meta.setLore(lore);
 		item.setItemMeta(meta);
 		return item;
@@ -109,6 +110,7 @@ public class ItemUtils {
 	 */
 	public static ItemStack setLore(ItemStack item, List<String> lore) {
 		ItemMeta meta = item.getItemMeta();
+		ColorUtils.tr(lore);
 		meta.setLore(lore);
 		item.setItemMeta(meta);
 		return item;
@@ -124,7 +126,7 @@ public class ItemUtils {
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = meta.getLore();
 		lore = lore == null ? new ArrayList<>() : lore;
-		lore.add(line);
+		lore.add(ColorUtils.tr(line));
 		meta.setLore(lore);
 		item.setItemMeta(meta);
 		return item;
@@ -140,8 +142,11 @@ public class ItemUtils {
 		ItemMeta meta = item.getItemMeta();
 		List<String> lore = meta.getLore();
 		lore = lore == null ? new ArrayList<>() : lore;
-		lines.forEach(lore::add);
-		meta.setLore(lore);
+		List<String> finalLore = lore;
+		lines.forEach(line -> {
+			finalLore.add(ColorUtils.tr(line));
+		});
+		meta.setLore(finalLore);
 		item.setItemMeta(meta);
 		return item;
 	}

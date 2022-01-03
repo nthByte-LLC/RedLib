@@ -133,14 +133,17 @@ public class ItemBuilder extends ItemStack {
 		ItemUtils.addAttribute(this, attribute, modifier);
 		return this;
 	}
-	
-	/**
-	 * Adds an attribute to this ItemBuilder
-	 * @param attribute The attribute to be added
-	 * @param amount The amount of the modifier
-	 * @param operation The operation of the modifier 
-	 * @return The ItemBuilder with the attribute added
-	 */
+
+	public ItemBuilder addGlow(){
+		ItemUtils.addEnchant(this, Enchantment.WATER_WORKER, 700);
+		return this;
+	}
+
+	public ItemBuilder removeGlow(){
+		removeEnchantment(Enchantment.WATER_WORKER);
+		return this;
+	}
+
 	public ItemBuilder addAttribute(Attribute attribute, double amount, Operation operation) {
 		ItemUtils.addAttribute(this, attribute, amount, operation);
 		return this;
