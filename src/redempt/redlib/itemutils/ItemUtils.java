@@ -190,6 +190,10 @@ public class ItemUtils {
 		item.setItemMeta(meta);
 		return item;
 	}
+
+	public static ItemStack removeEnchantment(ItemStack item, Enchantment enchant){
+		return addEnchant(item, enchant, 0);
+	}
 	
 	/**
 	 * Add an attribute to the item

@@ -9,7 +9,10 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+
+import java.util.ArrayList;
 
 /**
  * A utility class to easily create items
@@ -79,6 +82,13 @@ public class ItemBuilder extends ItemStack {
 	 */
 	public ItemBuilder setLore(String... lore) {
 		ItemUtils.setLore(this, lore);
+		return this;
+	}
+
+	public ItemBuilder clearLore(){
+		ItemMeta meta = this.getItemMeta();
+		meta.setLore(new ArrayList<>());
+		this.setItemMeta(meta);
 		return this;
 	}
 	
