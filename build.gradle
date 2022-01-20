@@ -51,7 +51,7 @@ publishing {
 		maven(MavenPublication) {
 			groupId = 'com.github.Redempt'
 			artifactId = rootProject.name
-			version = "6.3.0.5"
+			version = "6.4.0.2"
 			artifact javadocJar
 			artifact sourcesJar
 			from components.java
