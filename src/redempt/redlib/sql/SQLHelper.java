@@ -190,6 +190,25 @@ public class SQLHelper implements Closeable {
 			sneakyThrow(e);
 		}
 	}
+
+	/**
+	 * Executes a SQL query as a prepared statement, setting its fields to the elements of the vararg passed
+	 * @author U9G
+	 * @param command The SQL command to execute
+	 * @param fields A vararg of the fields to set in the prepared statement
+	 * @return The number of updated rows
+	 */
+	public int executeUpdate(String command, Object... fields) {
+		int updatedRows = 0;
+		try {
+			PreparedStatement statement = prepareStatement(command, fields);
+			updatedRows = statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			sneakyThrow(e);
+		}
+		return updatedRows;
+	}
 	
 	/**
 	 * Executes a SQL query as a prepared statement, setting its fields to the elements of the vararg passed,
@@ -233,6 +252,30 @@ public class SQLHelper implements Closeable {
 				return null;
 			}
 			String val = results.getString(1);
+			results.close();
+			statement.close();
+			return val;
+		} catch (SQLException e) {
+			sneakyThrow(e);
+			return null;
+		}
+	}
+	
+	/**
+	 * Executes a SQL query as a prepared statement, setting its fields to the elements of the vararg passed,
+	 * returning the value in the first column of the first row in the results as a Bytes.
+	 * @param query The SQL query to execute
+	 * @param fields A vararg of the fields to set in the prepared statement
+	 * @return The bytes in the first column of the first row of the returned results, or null if none is present
+	 */
+	public byte[] querySingleResultBytes(String query, Object... fields) {
+		try {
+			PreparedStatement statement = prepareStatement(query, fields);
+			ResultSet results = statement.executeQuery();
+			if (!results.next()) {
+				return null;
+			}
+			byte[] val = results.getBytes(1);
 			results.close();
 			statement.close();
 			return val;
@@ -505,7 +548,21 @@ public class SQLHelper implements Closeable {
 				return null;
 			}
 		}
-		
+
+		/**
+		 * Gets the bytes in the given column in the current row
+		 * @param column The index of the column to get, starting at 1
+		 * @return The bytes in the column
+		 */
+		public byte[] getBytes(int column) {
+			try {
+				return results.getBytes(column);
+			} catch (SQLException e) {
+				sneakyThrow(e);
+				return null;
+			}
+		}
+
 		/**
 		 * Gets a String in the given column in the current row
 		 * @param column The index of the column to get, starting at 1
