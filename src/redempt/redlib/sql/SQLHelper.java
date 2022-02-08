@@ -4,6 +4,7 @@ import redempt.redlib.RedLib;
 import redempt.redlib.misc.Task;
 
 import java.io.Closeable;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import java.util.function.Consumer;
 
 /**
@@ -25,10 +27,15 @@ public class SQLHelper implements Closeable {
 	 * @param file The path to the SQLite database file
 	 * @return The Connection to this SQLite database
 	 */
-	public static Connection openSQLite(java.nio.file.Path file) {
+	public static Connection openSQLite(Path file) {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			return DriverManager.getConnection("jdbc:sqlite:" + file.toAbsolutePath() + "?foreign_keys=on&busy_timeout=1000");
+
+			final Properties properties = new Properties();
+			properties.setProperty("foreign_keys", "on");
+			properties.setProperty("busy_timeout", "1000");
+
+			return DriverManager.getConnection("jdbc:sqlite:" + file.toAbsolutePath(), properties);
 		} catch (ClassNotFoundException | SQLException e) {
 			sneakyThrow(e);
 			return null;
