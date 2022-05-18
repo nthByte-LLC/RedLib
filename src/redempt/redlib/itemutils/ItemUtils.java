@@ -19,6 +19,7 @@ import org.bukkit.persistence.PersistentDataType;
 import redempt.redlib.RedLib;
 import redempt.redlib.json.JSONMap;
 import redempt.redlib.json.JSONParser;
+import redempt.redlib.misc.ColorUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -186,7 +187,7 @@ public class ItemUtils {
 	public static ItemStack removeEnchantment(ItemStack item, Enchantment enchant){
 		return addEnchant(item, enchant, 0);
 	}
-
+	
 	/**
 	 * Add an attribute to the item
 	 * @param item The item to have an attribute added
