@@ -187,7 +187,7 @@ public class ItemUtils {
 	public static ItemStack removeEnchantment(ItemStack item, Enchantment enchant){
 		return addEnchant(item, enchant, 0);
 	}
-
+	
 	/**
 	 * Add an attribute to the item
 	 * @param item The item to have an attribute added
@@ -555,7 +555,7 @@ public class ItemUtils {
 	public static boolean isEmpty(ItemStack item) {
 		return item == null || item.getType() == Material.AIR;
 	}
-	
+
 	/**
 	 * Converts an ItemStack to a JSON string
 	 * @param item The ItemStack to convert to a string
