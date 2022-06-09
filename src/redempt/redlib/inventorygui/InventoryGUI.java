@@ -387,7 +387,11 @@ public class InventoryGUI implements Listener {
 		inventory.clear();
 		buttons.clear();
 	}
-	
+
+	public int getBottomLeftSlot(){
+		return inventory.getSize() - 8;
+	}
+
 	/**
 	 * Remove this inventory as a listener and clean everything up to prevent memory leaks.
 	 * Call this when the GUI is no longer being used.

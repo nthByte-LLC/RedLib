@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A utility class to easily create items
@@ -100,6 +101,15 @@ public class ItemBuilder extends ItemStack {
 	public ItemBuilder addLore(String line) {
 		ItemUtils.addLore(this, line);
 		return this;
+	}
+
+	/**
+	 * Add multiple lines of lore to this ItemBuilder
+	 * @param lines The lines of lore
+	 * @return The ItemBuilder with lore added
+	 */
+	public ItemBuilder addLore(String... lines){
+		return addLore(Arrays.asList(lines));
 	}
 	
 	/**
