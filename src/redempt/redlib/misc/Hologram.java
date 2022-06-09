@@ -39,6 +39,10 @@ public class Hologram {
 	 * @return The Hologram that was created
 	 */
 	public static Hologram create(Location loc, String... lines) {
+		return create(loc, Arrays.asList(lines));
+	}
+
+	public static Hologram create(Location loc, List<String> lines){
 		Random random = new Random();
 		Hologram hologram = new Hologram(random.nextInt(Integer.MAX_VALUE) + 1, loc.clone());
 		for (String line : lines) {
