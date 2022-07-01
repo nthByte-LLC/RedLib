@@ -28,8 +28,18 @@ public class ConfigField {
 	public ConfigField(Field field) {
 		this.field = field;
 		ConfigName annotation = field.getAnnotation(ConfigName.class);
-		name = annotation == null ? field.getName() : annotation.value();
+		name = annotation == null ? camelToUnderscore(field.getName()) : annotation.value();
 		comments = FieldSummary.getComments(field);
+	}
+
+	private String camelToUnderscore(String str){
+		String underscore;
+		underscore = String.valueOf(Character.toLowerCase(str.charAt(0)));
+		for (int i = 1; i < str.length(); i++) {
+			underscore += Character.isLowerCase(str.charAt(i)) ? String.valueOf(str.charAt(i))
+					: "_" + Character.toLowerCase(str.charAt(i));
+		}
+		return underscore;
 	}
 	
 	/**
@@ -40,7 +50,7 @@ public class ConfigField {
 	}
 	
 	/**
-	 * Attemps to set the value of the field for the target object to the value
+	 * Attempts to set the value of the field for the target object to the value
 	 * @param target The target object
 	 * @param value The value
 	 */
@@ -53,7 +63,7 @@ public class ConfigField {
 	}
 	
 	/**
-	 * Attemps to set the field in a static context to the given value
+	 * Attempts to set the field in a static context to the given value
 	 * @param value The value
 	 */
 	public void set(Object value) {
@@ -75,7 +85,7 @@ public class ConfigField {
 	}
 	
 	/**
-	 * Attemps to get the value of the field in a static context
+	 * Attempts to get the value of the field in a static context
 	 * @return The value
 	 */
 	public Object get() {
