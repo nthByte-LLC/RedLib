@@ -164,6 +164,15 @@ public class ItemBuilder extends ItemStack {
 		return this;
 	}
 
+	public ItemBuilder setGlow(boolean glow){
+		if(glow){
+			addGlow();
+		}else{
+			removeGlow();
+		}
+		return this;
+	}
+
 	public ItemBuilder addAttribute(Attribute attribute, double amount, Operation operation) {
 		ItemUtils.addAttribute(this, attribute, amount, operation);
 		return this;
