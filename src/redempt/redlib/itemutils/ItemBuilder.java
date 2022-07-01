@@ -14,6 +14,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  * A utility class to easily create items
@@ -65,6 +66,16 @@ public class ItemBuilder extends ItemStack {
 	 */
 	public ItemBuilder addEnchant(Enchantment enchant, int level) {
 		ItemUtils.addEnchant(this, enchant, level);
+		return this;
+	}
+
+	/**
+	 * Adds multiple enchantments to this ItemBuilder.
+	 * @param enchants The enchantments.
+	 * @return The enchanted ItemBuilder.
+	 */
+	public ItemBuilder addMultiEnchants(Map<Enchantment, Integer> enchants){
+		enchants.forEach(this::addEnchant);
 		return this;
 	}
 	

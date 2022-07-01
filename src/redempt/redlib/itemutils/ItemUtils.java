@@ -65,7 +65,11 @@ public class ItemUtils {
 	 */
 	public static ItemStack rename(ItemStack item, String name) {
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(ColorUtils.tr(name));
+		if(name == null){
+			meta.setDisplayName(null);
+		}else{
+			meta.setDisplayName(ColorUtils.tr(name));
+		}
 		item.setItemMeta(meta);
 		return item;
 	}
