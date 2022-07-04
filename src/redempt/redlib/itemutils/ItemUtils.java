@@ -157,7 +157,40 @@ public class ItemUtils {
 	public static ItemStack setLore(ItemStack item, String... lore) {
 		return setLore(item, Arrays.asList(lore));
 	}
-	
+
+	/**
+	 * Gets the lore for an item.
+	 * @param item The item.
+	 * @return The lore of the item.
+	 */
+	public static List<String> getLore(ItemStack item){
+
+		if(!item.hasItemMeta()){
+			return null;
+		}
+
+		ItemMeta meta = item.getItemMeta();
+		return meta.hasLore() ? meta.getLore() : null;
+
+	}
+
+	/**
+	 * Gets the display name for an item.
+	 * @param item The item.
+	 * @return The display name of the item.
+	 */
+	public static String getDisplayName(ItemStack item){
+
+		String displayName = "";
+		if(!item.hasItemMeta()){
+			return null;
+		}
+
+		ItemMeta meta = item.getItemMeta();
+		return meta.hasDisplayName() ? meta.getDisplayName() : null;
+
+	}
+
 	/**
 	 * Sets an item to be unbreakable
 	 * @param item The item to make unbreakable

@@ -74,7 +74,7 @@ public class ItemBuilder extends ItemStack {
 	 * @param enchants The enchantments.
 	 * @return The enchanted ItemBuilder.
 	 */
-	public ItemBuilder addMultiEnchants(Map<Enchantment, Integer> enchants){
+	public ItemBuilder addEnchants(Map<Enchantment, Integer> enchants){
 		enchants.forEach(this::addEnchant);
 		return this;
 	}
