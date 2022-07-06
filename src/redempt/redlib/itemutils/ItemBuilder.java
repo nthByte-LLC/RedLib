@@ -166,6 +166,7 @@ public class ItemBuilder extends ItemStack {
 	}
 
 	public ItemBuilder addGlow(){
+		ItemUtils.addItemFlags(this, ItemFlag.HIDE_ENCHANTS);
 		ItemUtils.addEnchant(this, Enchantment.WATER_WORKER, 700);
 		return this;
 	}
