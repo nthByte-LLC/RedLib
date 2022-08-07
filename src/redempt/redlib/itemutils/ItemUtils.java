@@ -51,10 +51,10 @@ public class ItemUtils {
 		return base;
 	}
 	
-	private static Material skullType = RedLib.MID_VERSION >= 13 ? Material.valueOf("PLAYER_HEAD") : Material.valueOf("SKULL_ITEM");
+	private static String skullType = RedLib.MID_VERSION >= 13 ? "PLAYER_HEAD" : "SKULL_ITEM";
 	
 	private static ItemStack getBaseSkull() {
-		return RedLib.MID_VERSION >= 13 ? new ItemStack(skullType) : new ItemStack(skullType, 1, (short) 3);
+		return RedLib.MID_VERSION >= 13 ? new ItemStack(Material.valueOf(skullType)) : new ItemStack(Material.valueOf(skullType), 1, (short) 3);
 	}
 	
 	/**
@@ -144,6 +144,39 @@ public class ItemUtils {
 			finalLore.add(ColorUtils.tr(line));
 		});
 		meta.setLore(finalLore);
+		item.setItemMeta(meta);
+		return item;
+	}
+
+	/**
+	 * Remove a specific line of lore from an ItemStack if present in an ItemStack
+	 * @param item The ItemStack to remove lore from
+	 * @param line The line of lore to remove
+	 * @return The modified ItemStack
+	 */
+	public static ItemStack removeLoreLine(ItemStack item, String line){
+		ItemMeta meta = item.getItemMeta();
+		List<String> lore = meta.getLore();
+		lore.remove(line);
+		meta.setLore(lore);
+		item.setItemMeta(meta);
+		return item;
+	}
+
+	/**
+	 * Removes a specific index-line of lore from an ItemStack if present in an ItemStack
+	 * @param item The ItemStack to remove lore from
+	 * @param index The index of the line of lore to remove
+	 * @return The modified ItemStack
+	 */
+	public static ItemStack removeLoreLine(ItemStack item, int index){
+		ItemMeta meta = item.getItemMeta();
+		List<String> lore = meta.getLore();
+		if (index < 0 || index > lore.size()) {
+                    throw new IllegalArgumentException("Value out of bounds (" + index + ")");
+                }
+		lore.remove(index);
+		meta.setLore(lore);
 		item.setItemMeta(meta);
 		return item;
 	}
